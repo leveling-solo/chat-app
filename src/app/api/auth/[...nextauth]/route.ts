@@ -12,8 +12,20 @@ const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "Enter your email",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Enter your password",
+        },
+      },
       async authorize(
-        credentials: Credentials | undefined
+        credentials: Record<string, string> | undefined
       ): Promise<any | null> {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Please enter your email and password");
